@@ -1,0 +1,63 @@
+#!/usr/bin/env ruby
+
+require 'rexml/document'
+
+# Reads a list of checkstyle files and returns a nice Buildkite build annotation
+# on STDOUT that summarizes any errors.
+
+checkstyle_dir = ARGV[0]
+abort('Usage: annotate <checkstyle-dir>') unless checkstyle_dir
+abort("#{checkstyle_dir} does not exist") unless Dir.exist?(checkstyle_dir)
+
+class Error < Struct.new(:name, :line, :message, :severity, :source, :type)
+end
+
+checkstyle_report_files = Dir.glob(File.join(checkstyle_dir, '**', '*'))
+errors = []
+
+checkstyle_report_files.sort.each do |file|
+  next if File.directory?(file)
+
+  STDERR.puts "Parsing #{file.sub(checkstyle_dir, '')}"
+  xml = File.read(file)
+  doc = REXML::Document.new(xml)
+
+  REXML::XPath.each(doc, '//checkstyle//file') do |f|
+    name = f.attributes['name'].to_s
+    f.elements.each('error') do |e|
+      errors << Error.new(
+        name,
+        e.attributes['line'],
+        e.attributes['message'],
+        e.attributes['severity'],
+        e.attributes['source'],
+        :error
+      )
+    end
+  end
+end
+
+STDERR.puts '--- ❓ Checking errors'
+
+if errors.empty?
+  STDERR.puts 'There were no errors 🙌'
+  exit 0
+else
+  STDERR.puts "There #{errors.length == 1 ? 'is 1 error' : "are #{errors.length} errors"} 😭"
+end
+
+STDERR.puts '--- ✍️ Preparing annotation'
+
+errors_count = errors.select { |f| f.type == :error }.length
+
+if not errors_count.zero?
+  puts errors_count == 1 ? '1 error' : "#{errors_count} errors"
+end
+
+errors.each do |e|
+  puts '<details>'
+  puts "<summary><code>#{e.name}:#{e.line}</code></summary>\n\n"
+  puts "<code><pre>#{e.source}: #{e.message.chomp.strip}</pre></code>\n\n"
+  puts '</details>'
+  puts '' unless e == errors.last
+end

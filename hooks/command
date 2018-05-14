@@ -1,0 +1,40 @@
+#!/bin/bash
+
+set -euo pipefail
+
+PLUGIN_DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)/.."
+
+echo "--- :bowtie: Download the Checkstyle files"
+
+artifacts_dir="$(pwd)/$(mktemp -d "checkstyle-annotate-plugin-artifacts-tmp.XXXXXXXXXX")"
+annotation_dir="$(pwd)/$(mktemp -d "checkstyle-annotate-plugin-annotation-tmp.XXXXXXXXXX")"
+annotation_path="${annotation_dir}/annotation.md"
+
+function cleanup {
+  rm -rf "${artifacts_dir}"
+  rm -rf "${annotation_dir}"
+}
+
+trap cleanup EXIT
+
+buildkite-agent artifact download \
+  "${BUILDKITE_PLUGIN_CHECKSTYLE_ANNOTATE_ARTIFACTS}" \
+  "$artifacts_dir"
+
+echo "--- :checkstyle: Processing the Checkstyle files"
+
+docker \
+  --log-level "error" \
+  run \
+    --rm \
+    --volume "$artifacts_dir:/checkstyles" \
+    --volume "$PLUGIN_DIR/ruby:/src" \
+    ruby:2.5-alpine /src/bin/annotate /checkstyles \
+      > "$annotation_path"
+
+cat "$annotation_path"
+
+if grep -q "<details>" "$annotation_path"; then
+  echo "--- :buildkite: Creating annotation"
+  cat "$annotation_path" | buildkite-agent annotate --context checkstyle --style error
+fi

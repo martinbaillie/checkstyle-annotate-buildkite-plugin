@@ -1,0 +1,12 @@
+name: checkstyle-annotate
+description: Annotates your build using Checkstyle XML reports
+author: https://github.com/martinbaillie
+requirements:
+  - docker
+configuration:
+  properties:
+    artifacts:
+      type: string
+  required:
+    - artifacts
+  additionalProperties: false

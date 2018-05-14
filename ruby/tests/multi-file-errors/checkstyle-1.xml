@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="5.0">
+  <file name="internal/testapp/api.go">
+    <error column="0" line="285" message="line is 102 characters" severity="warning" source="lll" />
+    <error column="0" line="233" message="line is 105 characters" severity="warning" source="lll" />
+    <error column="0" line="185" message="line is 102 characters" severity="warning" source="lll" />
+    <error column="1" line="1" message="package comment should be of the form &quot;Package testapp ...&quot;" severity="warning" source="golint" />
+    <error column="0" line="374" message="duplicate of internal/testapp/api.go:310-320" severity="warning" source="dupl" />
+    <error column="0" line="310" message="duplicate of internal/testapp/api.go:374-384" severity="warning" source="dupl" />
+    <error column="0" line="220" message="declaration of &quot;mechanism&quot; shadows declaration at internal/testapp/api.go:26" severity="warning" source="vetshadow" />
+    <error column="0" line="124" message="declaration of &quot;mechanism&quot; shadows declaration at internal/testapp/api.go:26" severity="warning" source="vetshadow" />
+    <error column="0" line="434" message="line is 101 characters" severity="warning" source="lll" />
+    <error column="0" line="401" message="line is 101 characters" severity="warning" source="lll" />
+    <error column="0" line="323" message="line is 116 characters" severity="warning" source="lll" />
+    <error column="0" line="301" message="line is 105 characters" severity="warning" source="lll" />
+  </file>
+</checkstyle>

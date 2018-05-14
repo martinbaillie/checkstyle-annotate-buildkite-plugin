@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="5.0">
+  <file name="internal/testapp/api.go">
+    <error column="22" line="285" message="error return value not checked (jsonparser.ArrayEach(data, func(value []byte, dataType jsonparser.ValueType, offset int, err error) {)" severity="warning" source="errcheck" />
+    <error column="15" line="266" message="error return value not checked (awsini.SaveTo(homeDir + &quot;/.aws/credentials&quot;))" severity="warning" source="errcheck" />
+    <error column="19" line="263" message="error return value not checked (awsini.NewSection(&quot;testapp-&quot; + username))" severity="warning" source="errcheck" />
+    <error column="22" line="185" message="error return value not checked (jsonparser.ArrayEach(data, func(value []byte, dataType jsonparser.ValueType, offset int, err error) {)" severity="warning" source="errcheck" />
+    <error column="0" line="220" message="declaration of &quot;mechanism&quot; shadows declaration at internal/testapp/api.go:26" severity="warning" source="vetshadow" />
+    <error column="45" line="189" message="unnecessary conversion" severity="warning" source="unconvert" />
+    <error column="53" line="187" message="unnecessary conversion" severity="warning" source="unconvert" />
+    <error column="1" line="1" message="package comment should be of the form &quot;Package testapp ...&quot;" severity="warning" source="golint" />
+    <error column="0" line="401" message="line is 101 characters" severity="warning" source="lll" />
+    <error column="53" line="301" message="should omit comparison to bool constant, can be simplified to !strings.Contains(app.DisplayName, &quot;Break&quot;) (S1002)" severity="warning" source="megacheck" />
+    <error column="48" line="286" message="unnecessary conversion" severity="warning" source="unconvert" />
+    <error column="15" line="343" message="error return value not checked (xml.Unmarshal(samlDecoded, &amp;xmlData))" severity="warning" source="errcheck" />
+    <error column="5" line="122" message="should omit comparison to bool constant, can be simplified to !testappAttemptPreAuth(appFlag) (S1002)" severity="warning" source="megacheck" />
+    <error column="15" line="405" message="error return value not checked (awsini.SaveTo(homeDir + &quot;/.aws/credentials&quot;))" severity="warning" source="errcheck" />
+    <error column="0" line="323" message="line is 116 characters" severity="warning" source="lll" />
+    <error column="15" line="438" message="error return value not checked (awsini.SaveTo(homeDir + &quot;/.aws/credentials&quot;))" severity="warning" source="errcheck" />
+    <error column="0" line="434" message="line is 101 characters" severity="warning" source="lll" />
+    <error column="15" line="447" message="error return value not checked (awsini.SaveTo(homeDir + &quot;/.aws/credentials&quot;))" severity="warning" source="errcheck" />
+    <error column="48" line="186" message="unnecessary conversion" severity="warning" source="unconvert" />
+    <error column="0" line="310" message="duplicate of internal/testapp/api.go:374-384" severity="warning" source="dupl" />
+    <error column="53" line="188" message="unnecessary conversion" severity="warning" source="unconvert" />
+    <error column="0" line="374" message="duplicate of internal/testapp/api.go:310-320" severity="warning" source="dupl" />
+    <error column="43" line="223" message="unnecessary conversion" severity="warning" source="unconvert" />
+    <error column="0" line="185" message="line is 102 characters" severity="warning" source="lll" />
+    <error column="39" line="287" message="unnecessary conversion" severity="warning" source="unconvert" />
+    <error column="0" line="233" message="line is 105 characters" severity="warning" source="lll" />
+    <error column="2" line="162" message="should use 'return &lt;expr&gt;' instead of 'if &lt;expr&gt; { return &lt;bool&gt; }; return &lt;bool&gt;' (S1008)" severity="warning" source="megacheck" />
+    <error column="0" line="285" message="line is 102 characters" severity="warning" source="lll" />
+    <error column="0" line="124" message="declaration of &quot;mechanism&quot; shadows declaration at internal/testapp/api.go:26" severity="warning" source="vetshadow" />
+    <error column="0" line="301" message="line is 105 characters" severity="warning" source="lll" />
+  </file>
+</checkstyle>
