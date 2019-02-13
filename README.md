@@ -14,8 +14,8 @@ steps:
   - wait: ~
     continue_on_failure: true
   - plugins:
-      checkstyle-annotate:
-        artifacts: tmp/checkstyle-*.xml
+      - checkstyle-annotate:
+          artifacts: tmp/checkstyle-*.xml
 ```
 
 ## Configuration
