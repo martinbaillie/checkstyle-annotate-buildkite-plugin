@@ -29,7 +29,7 @@ docker \
     --rm \
     --volume "$artifacts_dir:/checkstyles" \
     --volume "$PLUGIN_DIR/ruby:/src" \
-    ruby:2.5-alpine /src/bin/annotate /checkstyles \
+    public.ecr.aws/docker/library/ruby:2.5-alpine /src/bin/annotate /checkstyles \
       > "$annotation_path"
 
 cat "$annotation_path"
